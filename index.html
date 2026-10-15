@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMARTCOW AI — Platform Cerdas Peternakan Sapi</title>
+<meta name="description" content="SMARTCOW AI: scan kondisi tubuh & bobot sapi, edukasi hologram 3D, dan kalkulator pakan otomatis.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===================== PAGE LOADER ===================== -->
+<div class="page-loader" id="pageLoader">
+  <div class="loader-inner">
+    <svg class="loader-mark" viewBox="0 0 32 32" fill="none">
+      <circle cx="16" cy="16" r="15" stroke="#4FD1C5" stroke-width="1.5"/>
+      <path d="M9 14c1-2 3-3 7-3s6 1 7 3M9 14c0 5 3 9 7 9s7-4 7-9M9 14l-2-2M23 14l2-2" stroke="#E8B94F" stroke-width="1.4" stroke-linecap="round"/>
+    </svg>
+    <div class="loader-word">SMARTCOW<span class="brand-ai">AI</span></div>
+    <div class="loader-bar"><div class="loader-fill" id="loaderFill"></div></div>
+    <div class="loader-text" id="loaderText">MENGINISIALISASI SISTEM… 0%</div>
+  </div>
+</div>
+
+<!-- ===================== PAGE TRANSITION WIPE ===================== -->
+<div class="page-wipe" id="pageWipe"></div>
+
+<!-- ===================== CURSOR GLOW ===================== -->
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- ===================== NAV ===================== -->
+<nav class="nav">
+  <div class="nav-inner container">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="15" stroke="#4FD1C5" stroke-width="1.5"/>
+        <path d="M9 14c1-2 3-3 7-3s6 1 7 3M9 14c0 5 3 9 7 9s7-4 7-9M9 14l-2-2M23 14l2-2" stroke="#E8B94F" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+      SMARTCOW<span class="brand-ai">AI</span>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <span class="nav-indicator" id="navIndicator"></span>
+      <a href="#scan" data-nav="scan">Scan Ternak</a>
+      <a href="#edukasi" data-nav="edukasi">Edukasi 3D</a>
+      <a href="#pakan" data-nav="pakan">Pakan</a>
+      <a href="#chat" data-nav="chat">Chat AI</a>
+      <a href="#tim" data-nav="tim">Tim</a>
+    </div>
+    <button class="nav-cta" data-nav-jump="scan">Mulai Scan</button>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+  </div>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow reveal-hero" style="transition-delay:.05s;">Platform Peternakan Presisi</div>
+      <h1 class="reveal-hero" style="transition-delay:.15s;">Kenali kondisi ternak sapi Anda lebih <em>cepat &amp; akurat</em></h1>
+      <p class="lead reveal-hero" style="transition-delay:.25s;">SMARTCOW AI membantu peternak memindai kondisi tubuh &amp; bobot sapi, mempelajari anatomi lewat hologram 3D interaktif, dan menghitung kebutuhan pakan harian secara otomatis.</p>
+      <div class="hero-actions reveal-hero" style="transition-delay:.35s;">
+        <button class="btn btn-primary" data-nav-jump="scan">Mulai Scan Ternak →</button>
+        <button class="btn btn-ghost" data-nav-jump="edukasi">Lihat Hologram 3D</button>
+      </div>
+      <div class="hero-stats reveal-hero" style="transition-delay:.45s;">
+        <div class="hero-stat"><b data-count="3">0</b><span>Fitur utama terintegrasi</span></div>
+        <div class="hero-stat"><b>2</b><span>Rumus bobot standar (Schoorl &amp; Winter)</span></div>
+        <div class="hero-stat"><b>1:1</b><span>Model 3D anatomi sapi</span></div>
+      </div>
+    </div>
+    <div class="hero-visual reveal-hero" style="transition-delay:.2s;">
+      <div class="scanframe">
+        <div class="corner-tl"></div><div class="corner-br"></div>
+        <div class="scan-sweep"></div>
+        <span class="tag tag-bcs">BCS 3.0 / 5</span>
+        <span class="tag tag-weight">≈ 312 kg</span>
+        <svg class="cow-silhouette" viewBox="0 0 400 260" fill="none">
+          <g fill="#1B2E20" stroke="#4FD1C5" stroke-width="1.4">
+            <ellipse cx="190" cy="140" rx="115" ry="58"/>
+            <circle cx="320" cy="105" r="34"/>
+            <ellipse cx="345" cy="98" rx="10" ry="7"/>
+            <rect x="95" y="185" width="16" height="55" rx="6"/>
+            <rect x="150" y="192" width="16" height="55" rx="6"/>
+            <rect x="220" y="192" width="16" height="55" rx="6"/>
+            <rect x="270" y="185" width="16" height="55" rx="6"/>
+            <path d="M60 130 Q30 150 45 200" stroke-width="6" stroke-linecap="round" fill="none"/>
+          </g>
+          <g stroke="#E8B94F" stroke-width="2" stroke-linecap="round">
+            <path d="M300 78 q-8 -18 4 -22"/>
+            <path d="M318 76 q2 -20 14 -18"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== FITUR 1: SCAN ===================== -->
+<section id="scan">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Fitur 01 — Analisis Ternak</div>
+      <h2>Scan kondisi tubuh &amp; bobot sapi</h2>
+      <p>Aktifkan mode pemantauan untuk mendeteksi sapi &amp; manusia secara real-time layaknya CCTV cerdas (lengkap notifikasi suara), atau ambil/unggah foto sebagai dokumentasi untuk menghitung estimasi bobot badan dan skor kondisi tubuh (BCS).</p>
+    </div>
+
+    <div class="scan-layout">
+      <!-- Capture panel -->
+      <div class="card capture-box scanframe reveal">
+        <div class="corner-tl"></div><div class="corner-br"></div>
+        <div class="capture-viewport">
+          <video id="camVideo" autoplay muted playsinline style="display:none;"></video>
+          <canvas id="detectOverlay"></canvas>
+          <img id="capturedImg" alt="Foto ternak" style="display:none;">
+          <div class="capture-placeholder" id="capturePlaceholder">
+            <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#6C8477" stroke-width="1.5"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7l1.5-3h5L16 7"/><circle cx="12" cy="13.5" r="3.5"/></svg>
+            <div>Aktifkan kamera untuk mulai pemantauan otomatis, atau unggah foto ternak sapi</div>
+          </div>
+
+          <!-- CCTV-style overlay HUD -->
+          <div class="cctv-hud" id="cctvHud" style="display:none;">
+            <div class="cctv-topbar">
+              <div class="cctv-rec"><span class="rec-dot"></span>LIVE</div>
+              <div class="cctv-cam-label">CAM 01 — AREA KANDANG</div>
+              <div class="cctv-clock" id="cctvClock">00:00:00</div>
+            </div>
+            <div class="cctv-status" id="cctvStatus">
+              <span class="cctv-status-dot"></span>
+              <span id="cctvStatusText">Memindai area…</span>
+            </div>
+          </div>
+          <div class="model-loading" id="modelLoading" style="display:none;">
+            <div class="holo-spinner"></div>
+            <span id="modelLoadingText">Memuat model deteksi AI…</span>
+          </div>
+        </div>
+        <div class="capture-controls">
+          <button class="btn btn-primary" id="btnStartCam" type="button">📹 Mulai Pemantauan</button>
+          <button class="btn btn-ghost" id="btnSnap" type="button" disabled>Ambil Foto</button>
+          <button class="btn btn-ghost" id="btnUpload" type="button">Unggah Foto</button>
+          <button class="btn btn-ghost" id="btnSound" type="button" title="Aktifkan/matikan notifikasi suara">🔊 Suara</button>
+          <input type="file" id="fileInput" accept="image/*" hidden>
+        </div>
+        <div class="detect-log" id="detectLog" style="display:none;">
+          <div class="detect-log-head">Log Deteksi</div>
+          <div class="detect-log-list" id="detectLogList"></div>
+        </div>
+        <canvas id="captureCanvas" style="display:none;"></canvas>
+        <div class="hint-note" id="scanStatus"><b>Catatan:</b> deteksi otomatis (sapi/manusia) berjalan langsung di perangkat Anda menggunakan model AI open-source (TensorFlow.js) — tidak ada video yang dikirim ke server manapun. Untuk bobot badan, gunakan foto/pengukuran pita ukur pada kolom di samping.</div>
+      </div>
+
+      <!-- Right column: Bobot calculator + BCS -->
+      <div>
+        <div class="card reveal" style="margin-bottom:20px;">
+          <h3 style="font-size:18px;margin-bottom:4px;">Estimasi Bobot Badan</h3>
+          <p style="font-size:12.5px;color:var(--ink-faint);margin-bottom:16px;">Rumus Schoorl &amp; Winter — standar umum peternakan sapi di Indonesia.</p>
+          <form id="formBobot">
+            <div class="form-row">
+              <div class="field">
+                <label>Lingkar Dada / LD (cm)</label>
+                <input type="number" id="inputLD" placeholder="mis. 165" required step="0.1">
+              </div>
+              <div class="field">
+                <label>Panjang Badan / PB (cm)</label>
+                <input type="number" id="inputPB" placeholder="mis. 130" step="0.1">
+              </div>
+            </div>
+            <div class="field field-full" style="margin-bottom:16px;">
+              <label>Bangsa Sapi</label>
+              <select id="inputBangsa">
+                <option value="bali">Sapi Bali</option>
+                <option value="ongole">Sapi Ongole / PO</option>
+                <option value="lain">Bangsa Lain / Silangan</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" type="submit" style="width:100%;justify-content:center;">Hitung Estimasi Bobot</button>
+          </form>
+
+          <div class="result-panel" id="bobotResultPanel" style="display:none;">
+            <div class="result-grid">
+              <div class="result-metric"><div class="m-label">Rumus Schoorl</div><div class="m-value" id="resSchoorl">—</div></div>
+              <div class="result-metric"><div class="m-label">Rumus Winter</div><div class="m-value" id="resWinter">—</div></div>
+              <div class="result-metric accent" style="grid-column:1/-1;"><div class="m-label">Estimasi Akhir (rata-rata)</div><div class="m-value" id="resFinal">—</div></div>
+            </div>
+
+            <p style="font-size:12.5px;color:var(--ink-dim);margin-top:12px;line-height:1.6;" id="resNote"></p>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <h3 style="font-size:18px;margin-bottom:4px;">Skor Kondisi Tubuh (BCS)</h3>
+          <p style="font-size:12.5px;color:var(--ink-faint);margin-bottom:14px;">Bandingkan foto ternak dengan panduan berikut, lalu pilih skor yang paling sesuai (skala 1–5).</p>
+          <div class="bcs-select" style="display:flex; gap:8px;">
+            <button data-bcs="1" class="btn btn-ghost" style="flex:1;padding:10px;">1</button>
+            <button data-bcs="2" class="btn btn-ghost" style="flex:1;padding:10px;">2</button>
+            <button data-bcs="3" class="btn btn-ghost" style="flex:1;padding:10px;">3</button>
+            <button data-bcs="4" class="btn btn-ghost" style="flex:1;padding:10px;">4</button>
+            <button data-bcs="5" class="btn btn-ghost" style="flex:1;padding:10px;">5</button>
+          </div>
+          <div class="bcs-scale">
+            <div class="bcs-dot"></div><div class="bcs-dot"></div><div class="bcs-dot"></div><div class="bcs-dot"></div><div class="bcs-dot"></div>
+          </div>
+          <div class="result-panel" id="bcsResultPanel" style="display:none;">
+            <p style="font-size:13.5px;color:var(--ink-dim);margin-top:6px;line-height:1.6;" id="bcsDescText"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FITUR 2: EDUKASI 3D ===================== -->
+<section id="edukasi" class="section-alt">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Fitur 02 — Edukasi Interaktif</div>
+      <h2>Hologram 3D anatomi sapi</h2>
+      <p>Seret untuk memutar model dari segala sudut. Geser slider pemindai untuk mengupas lapisan tubuh secara bertahap — dari kulit, otot &amp; rangka, hingga organ dalam — layaknya pemindaian holografik.</p>
+    </div>
+
+    <div class="holo-wrap">
+      <div class="holo-stage" id="holoStage">
+        <div class="holo-loading" id="holoLoading"><div class="holo-spinner"></div><span>Memuat model 3D…</span></div>
+        <div class="holo-grid-overlay"></div>
+        <div class="holo-hotspots" id="holoHotspots"></div>
+
+        <div class="holo-controls">
+          <div class="holo-toprow">
+            <div class="holo-toolbar">
+              <button id="btnAutoRotate" class="holo-icon-btn" type="button">⟳ Putar Otomatis</button>
+              <button id="btnResetView" class="holo-icon-btn" type="button">⤾ Reset Tampilan</button>
+            </div>
+            <div class="holo-zoomhint">Seret = putar · Scroll/pinch = perbesar</div>
+          </div>
+          <div class="holo-slider-wrap">
+            <span class="holo-slider-label">🩸 Kulit Luar</span>
+            <input type="range" id="layerSlider" min="0" max="100" value="0">
+            <span class="holo-slider-label">🫀 Organ Dalam</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card organ-detail-card reveal" id="organDetailCard">
+          <div class="eyebrow" style="margin-bottom:8px;">Detail Terpilih</div>
+          <h3 id="organDetailTitle" style="font-size:19px;">Sistem Pencernaan &amp; Organ Vital</h3>
+          <p id="organDetailDesc" style="font-size:13.5px;color:var(--ink-dim);margin-top:8px;line-height:1.6;">Klik salah satu organ pada model 3D, atau pilih dari daftar di bawah untuk melihat penjelasannya.</p>
+        </div>
+        <div class="card reveal" style="margin-top:16px;">
+          <h4 style="font-size:13px;color:var(--ink-faint);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.05em;margin-bottom:14px;">Peta Organ</h4>
+          <div class="part-legend" id="partLegend">
+            <button class="part-item" data-organ="rumen" type="button"><span class="part-dot" style="background:#B5563C;"></span><div><b>Rumen</b><span>Bilik fermentasi terbesar untuk mencerna serat kasar.</span></div></button>
+            <button class="part-item" data-organ="retikulum" type="button"><span class="part-dot" style="background:#D97757;"></span><div><b>Retikulum</b><span>Menyaring pakan sebelum diteruskan ke omasum.</span></div></button>
+            <button class="part-item" data-organ="omasum" type="button"><span class="part-dot" style="background:#E8B94F;"></span><div><b>Omasum</b><span>Menyerap air & nutrisi hasil fermentasi.</span></div></button>
+            <button class="part-item" data-organ="abomasum" type="button"><span class="part-dot" style="background:#4FD1C5;"></span><div><b>Abomasum</b><span>"Lambung sejati" — pencernaan enzimatis.</span></div></button>
+            <button class="part-item" data-organ="jantung" type="button"><span class="part-dot" style="background:#D96A5A;"></span><div><b>Jantung</b><span>Memompa darah ke seluruh tubuh.</span></div></button>
+            <button class="part-item" data-organ="paruparu" type="button"><span class="part-dot" style="background:#A9BCAE;"></span><div><b>Paru-paru</b><span>Organ pertukaran gas pernapasan.</span></div></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FITUR 3: PAKAN ===================== -->
+<section id="pakan">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Fitur 03 — Manajemen Pakan</div>
+      <h2>Kalkulator pakan otomatis &amp; tabel nutrisi</h2>
+      <p>Hitung kebutuhan bahan kering, protein kasar, TDN, dan air minum harian berdasarkan bobot serta fase fisiologis ternak — lengkap dengan referensi kandungan nutrisi bahan pakan umum.</p>
+    </div>
+
+    <div class="pakan-layout">
+      <div class="card reveal">
+        <h3 style="font-size:18px;margin-bottom:16px;">Kalkulator Kebutuhan Pakan</h3>
+        <form id="formPakan">
+          <div class="form-row">
+            <div class="field">
+              <label>Bobot Badan (kg)</label>
+              <input type="number" id="pakanBobot" placeholder="mis. 300" required>
+            </div>
+            <div class="field">
+              <label>Fase Fisiologis</label>
+              <select id="pakanFase">
+                <option value="pedet">Pedet (anak sapi)</option>
+                <option value="dara">Dara / Muda</option>
+                <option value="dewasa" selected>Dewasa</option>
+                <option value="laktasi">Induk Laktasi</option>
+                <option value="penggemukan">Penggemukan</option>
+              </select>
+            </div>
+          </div>
+          <div class="field field-full" style="margin-bottom:16px;">
+            <label>Target Pertambahan Bobot Harian / PBBH (kg/hari) — opsional</label>
+            <input type="number" id="pakanPBBH" placeholder="mis. 0.6" step="0.1">
+          </div>
+          <button class="btn btn-primary" type="submit" style="width:100%;justify-content:center;">Hitung Kebutuhan Pakan</button>
+        </form>
+
+        <div class="calc-output" id="pakanResultPanel" style="display:none;">
+          <div class="co-row"><span>Bahan Kering (BK) total</span><span id="outBK">—</span></div>
+          <div class="co-row"><span>Protein Kasar (PK)</span><span id="outPK">—</span></div>
+          <div class="co-row"><span>Total Digestible Nutrients (TDN)</span><span id="outTDN">—</span></div>
+          <div class="co-row"><span>Kebutuhan Air Minum</span><span id="outAir">—</span></div>
+          <div class="co-row"><span>Porsi Hijauan</span><span id="outHijauan">—</span></div>
+          <div class="co-row"><span>Porsi Konsentrat</span><span id="outKonsentrat">—</span></div>
+          <div class="ratio-bar">
+            <div class="ratio-hijauan" id="ratioHijauanBar" style="width:70%;">Hijauan 70%</div>
+            <div class="ratio-konsentrat" id="ratioKonsentratBar" style="width:30%;">Konsentrat 30%</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card reveal" style="margin-bottom:16px;padding:14px 18px;">
+          <input type="text" id="feedFilter" placeholder="🔍 Cari bahan pakan (mis. jagung, jerami)..." style="width:100%;background:var(--bg-soft);border:1px solid var(--panel-border);color:var(--ink);padding:10px 12px;border-radius:8px;font-size:14px;">
+        </div>
+        <div class="table-wrap">
+          <table class="nutrisi">
+            <thead>
+              <tr><th>Bahan Pakan</th><th>Bahan Kering (%)</th><th>Protein Kasar (%)</th><th>TDN (%)</th><th>Kategori</th></tr>
+            </thead>
+            <tbody>
+              <tr data-name="Rumput Gajah"><td>Rumput Gajah</td><td>20.0</td><td>10.2</td><td>55.0</td><td>Hijauan</td></tr>
+              <tr data-name="Rumput Raja / King Grass"><td>Rumput Raja (King Grass)</td><td>19.5</td><td>9.8</td><td>56.0</td><td>Hijauan</td></tr>
+              <tr data-name="Jerami Padi"><td>Jerami Padi</td><td>86.0</td><td>4.5</td><td>40.0</td><td>Hijauan Kering</td></tr>
+              <tr data-name="Jerami Jagung"><td>Jerami Jagung</td><td>84.0</td><td>6.0</td><td>52.0</td><td>Hijauan Kering</td></tr>
+              <tr data-name="Lamtoro"><td>Daun Lamtoro</td><td>27.0</td><td>22.0</td><td>60.0</td><td>Leguminosa</td></tr>
+              <tr data-name="Gamal"><td>Daun Gamal</td><td>26.0</td><td>21.5</td><td>58.0</td><td>Leguminosa</td></tr>
+              <tr data-name="Dedak Padi"><td>Dedak Padi (Bekatul)</td><td>89.0</td><td>12.0</td><td>65.0</td><td>Konsentrat</td></tr>
+              <tr data-name="Jagung Giling"><td>Jagung Giling</td><td>88.0</td><td>9.0</td><td>80.0</td><td>Konsentrat</td></tr>
+              <tr data-name="Bungkil Kedelai"><td>Bungkil Kedelai</td><td>90.0</td><td>44.0</td><td>78.0</td><td>Konsentrat Protein</td></tr>
+              <tr data-name="Bungkil Kelapa"><td>Bungkil Kelapa</td><td>88.0</td><td>21.0</td><td>75.0</td><td>Konsentrat Protein</td></tr>
+              <tr data-name="Ampas Tahu"><td>Ampas Tahu</td><td>14.0</td><td>23.0</td><td>68.0</td><td>Konsentrat Basah</td></tr>
+              <tr data-name="Molases"><td>Molases (Tetes Tebu)</td><td>75.0</td><td>3.0</td><td>72.0</td><td>Suplemen Energi</td></tr>
+              <tr data-name="Garam Mineral"><td>Garam &amp; Mineral Mix</td><td>98.0</td><td>0.0</td><td>0.0</td><td>Suplemen<span class="pill">wajib</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FITUR 4: CHAT AI PETERNAKAN ===================== -->
+<section id="chat" class="section-alt">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Fitur 04 — Asisten Bertanya</div>
+      <h2>Chat AI Peternakan</h2>
+      <p>Tanyakan seputar dunia peternakan sapi — pakan, kesehatan, reproduksi, manajemen kandang, hingga istilah teknis. Asisten ini <b>khusus menjawab topik peternakan</b> dan selalu menyertakan sumber rujukan pada setiap jawaban.</p>
+    </div>
+
+    <div class="chat-wrap card reveal scanframe">
+      <div class="corner-tl"></div><div class="corner-br"></div>
+      <div class="chat-header">
+        <div class="chat-header-info">
+          <span class="chat-avatar">🐮</span>
+          <div>
+            <b>Asisten Peternakan SMARTCOW</b>
+            <span>Basis pengetahuan terkurasi · khusus topik peternakan sapi</span>
+          </div>
+        </div>
+        <span class="chat-online"><span class="online-dot"></span>Siap membantu</span>
+      </div>
+
+      <div class="chat-body" id="chatBody">
+        <div class="chat-msg bot">
+          <div class="chat-bubble">
+            Halo! Saya asisten peternakan SMARTCOW AI 👋 Saya hanya menjawab pertanyaan seputar <b>dunia peternakan sapi</b> — pakan, kesehatan, reproduksi, manajemen kandang, dan sejenisnya, lengkap dengan sumber rujukannya. Silakan bertanya, atau pilih topik di bawah.
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-suggestions" id="chatSuggestions"></div>
+
+      <form class="chat-input-row" id="chatForm">
+        <input type="text" id="chatInput" placeholder="Tulis pertanyaan seputar peternakan sapi…" autocomplete="off">
+        <button class="btn btn-primary" type="submit">Kirim</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TIM PENGEMBANG ===================== -->
+<section id="tim" class="section-alt">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Tentang Kami</div>
+      <h2>Tim Pengembang</h2>
+      <p>SMARTCOW AI dikembangkan oleh mahasiswa Peternakan, Universitas Nusa Cendana.</p>
+    </div>
+    <div class="team-grid">
+      <div class="card team-card reveal">
+        <div class="team-avatar">RG</div>
+        <h4>Ravles Glorydo Noni</h4>
+        <p>Mahasiswa Peternakan — Universitas Nusa Cendana</p>
+      </div>
+      <div class="card team-card reveal">
+        <div class="team-avatar">MM</div>
+        <h4>Maria Magdalena Ule</h4>
+        <p>Mahasiswa Peternakan — Universitas Nusa Cendana</p>
+      </div>
+      <div class="card team-card reveal">
+        <div class="team-avatar">PC</div>
+        <h4>Pricilia Citradewi Antoni</h4>
+        <p>Mahasiswa Peternakan — Universitas Nusa Cendana</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="brand">SMARTCOW<span class="brand-ai">AI</span></div>
+        <p class="footer-note" style="margin-top:10px;">Platform edukasi &amp; bantu-hitung untuk peternak sapi — dikembangkan sebagai proyek mahasiswa Peternakan, Universitas Nusa Cendana.</p>
+      </div>
+      <p class="footer-note">Estimasi bobot &amp; kebutuhan pakan pada aplikasi ini bersifat referensi umum. Untuk keputusan manajemen ternak yang presisi, konsultasikan dengan dokter hewan atau penyuluh peternakan setempat.</p>
+    </div>
+    <div class="footer-credit">© <span id="yearNow"></span> SMARTCOW AI — Ravles Glorydo Noni · Maria Magdalena Ule · Pricilia Citradewi Antoni</div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.20.0/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.3/dist/coco-ssd.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
